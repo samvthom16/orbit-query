@@ -54,7 +54,7 @@ class ORBIT_QUERY_BASE{
 			$template_url = $template.'.php';	
 		}
 		
-		$theme_templates_url = get_stylesheet_directory()."/posts-query/".$template_url;
+		$theme_templates_url = get_stylesheet_directory()."/orbit-query/".$template_url;
 		$plugin_templates_url = plugin_dir_path(__FILE__)."/templates/".$template_url;
 		
 		

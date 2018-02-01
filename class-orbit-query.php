@@ -12,7 +12,7 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 	
 	function get_default_atts() {	
 		return array(
-			'tax'					=> '',
+			'tax_query'				=> '',
 			'sticky_posts'			=> '0',
 			'exclude_sticky_posts'	=> '0',
 			'post_type' 			=> 'post',
@@ -76,8 +76,8 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 			'offset'				=> self::get_offset($atts)
 		);
 		
-		if( isset( $atts['tax'] ) ){
-			$tax_arr = $this->explode_to_arr( $atts['tax'] );
+		if( isset( $atts['tax_query'] ) && !empty( $atts['tax_query'] ) ){
+			$tax_arr = $this->explode_to_arr( $atts['tax_query'], "#" );
 			
 			$query_atts['tax_query'] = array();
 			
@@ -90,11 +90,16 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 						array(
 							'taxonomy'	=> $temp[0],
 							'field'		=> 'slug',
-							'terms'		=> $temp[1]
+							'terms'		=> $this->explode_to_arr( $temp[1] )
 						)
 					);
 				}
 			}	
+			/*
+			echo "<pre>";
+			print_r( $query_atts['tax_query'] );
+			echo "</pre>";
+			*/
 			
 		}
 		
@@ -103,7 +108,7 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 		$this->query = new WP_Query( $query_atts );
 		
 		if( $this->query->have_posts() ){
-			the_pq_articles( $atts );
+			the_orbit_articles( $atts );
 			wp_reset_postdata();
 		}
 			
@@ -151,5 +156,5 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 	
 }
 
-global $posts_query;	
-$posts_query = new ORBIT_QUERY;
+global $orbit_query;	
+$orbit_query = new ORBIT_QUERY;

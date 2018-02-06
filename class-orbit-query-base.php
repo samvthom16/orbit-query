@@ -55,6 +55,7 @@ class ORBIT_QUERY_BASE{
 					'html' => array( 
 						'type' 		=> 'textarea',
 						'text' 		=> 'HTML', 
+						'help'		=> 'Put your html or php code here. Sample Code: '.htmlspecialchars('<?php the_title();?>'),
 					),
 				)
 			),

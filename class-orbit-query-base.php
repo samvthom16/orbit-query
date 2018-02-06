@@ -22,6 +22,47 @@ class ORBIT_QUERY_BASE{
 		
 		add_action( 'wp_ajax_'.$this->shortcode_slug, array( $this, 'ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_'.$this->shortcode_slug, array( $this, 'ajax_callback' ) );
+		
+		/* ADD FORMS THROUGH THE BACKEND */
+		add_filter( 'orbit_post_type_vars', array( $this, 'create_post_type' ) );
+		
+		/* ADD THE RELEVANT META BOXES TO THE FORM */
+		add_filter( 'orbit_meta_box_vars', array( $this, 'create_meta_box' ) );
+	}
+	
+	function create_post_type( $post_types ){
+			
+		$post_types['orbit-tmp'] = array(
+			'slug' 		=> 'orbit-tmp',
+			'labels'	=> array(
+				'name' 			=> 'Orbit Templates',
+				'singular_name' => 'Orbit Template',
+			),
+			'supports'	=> array( 'title' ),
+			'menu_icon'	=> 'dashicons-media-document'
+		);
+			
+		return $post_types;
+	}
+	
+	function create_meta_box( $meta_box ){
+			
+		$meta_box['orbit-tmp'] = array(
+			array(
+				'id'		=> 'orbit-tmp-cf',
+				'title'		=> 'Settings',
+				'fields'	=> array(
+					'html' => array( 
+						'type' 		=> 'textarea',
+						'text' 		=> 'HTML', 
+					),
+				)
+			),
+		);
+			
+		
+			
+		return $meta_box;
 	}
 	
 	function get_default_atts(){

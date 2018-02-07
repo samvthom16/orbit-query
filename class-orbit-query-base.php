@@ -39,14 +39,18 @@ class ORBIT_QUERY_BASE{
 				'singular_name' => 'Orbit Template',
 			),
 			'supports'	=> array( 'title' ),
-			'menu_icon'	=> 'dashicons-media-document'
+			'menu_icon'	=> 'dashicons-media-spreadsheet'
 		);
 			
 		return $post_types;
 	}
 	
 	function create_meta_box( $meta_box ){
+		
+		global $post_type;
 			
+		if( 'orbit-tmp' != $post_type ) return $meta_box;
+		
 		$meta_box['orbit-tmp'] = array(
 			array(
 				'id'		=> 'orbit-tmp-cf',

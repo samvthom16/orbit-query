@@ -12,7 +12,8 @@ $inc_files = array(
 	'class-orbit-query-base.php',
 	'class-orbit-query.php',
 	'class-orbit-query-users.php',
-	'the.php'
+	'the.php',
+	'shortcodes.php'
 );
 
 foreach( $inc_files as $inc_file ){

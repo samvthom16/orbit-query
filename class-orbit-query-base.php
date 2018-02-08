@@ -54,12 +54,12 @@ class ORBIT_QUERY_BASE{
 		$meta_box['orbit-tmp'] = array(
 			array(
 				'id'		=> 'orbit-tmp-cf',
-				'title'		=> 'Settings',
+				'title'		=> 'Extra Settings',
 				'fields'	=> array(
 					'html' => array( 
 						'type' 		=> 'textarea',
 						'text' 		=> 'HTML', 
-						'help'		=> 'Put your html or php code here. Sample Code: '.htmlspecialchars('<?php the_title();?>'),
+						'help'		=> 'Put your html or php code here. Shortcodes available: [orbit_title] [orbit_link] [orbit_author_link] [orbit_author] [orbit_date] [orbit_excerpt]',
 					),
 				)
 			),

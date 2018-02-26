@@ -23,52 +23,11 @@ class ORBIT_QUERY_BASE{
 		add_action( 'wp_ajax_'.$this->shortcode_slug, array( $this, 'ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_'.$this->shortcode_slug, array( $this, 'ajax_callback' ) );
 		
-		/* ADD FORMS THROUGH THE BACKEND */
-		add_filter( 'orbit_post_type_vars', array( $this, 'create_post_type' ) );
-		
-		/* ADD THE RELEVANT META BOXES TO THE FORM */
-		add_filter( 'orbit_meta_box_vars', array( $this, 'create_meta_box' ) );
 	}
 	
-	function create_post_type( $post_types ){
-			
-		$post_types['orbit-tmp'] = array(
-			'slug' 		=> 'orbit-tmp',
-			'labels'	=> array(
-				'name' 			=> 'Orbit Templates',
-				'singular_name' => 'Orbit Template',
-			),
-			'supports'	=> array( 'title' ),
-			'menu_icon'	=> 'dashicons-media-spreadsheet'
-		);
-			
-		return $post_types;
-	}
 	
-	function create_meta_box( $meta_box ){
-		
-		global $post_type;
-			
-		if( 'orbit-tmp' != $post_type ) return $meta_box;
-		
-		$meta_box['orbit-tmp'] = array(
-			array(
-				'id'		=> 'orbit-tmp-cf',
-				'title'		=> 'Extra Settings',
-				'fields'	=> array(
-					'html' => array( 
-						'type' 		=> 'textarea',
-						'text' 		=> 'HTML', 
-						'help'		=> 'Put your html or php code here. Shortcodes available: [orbit_title] [orbit_link] [orbit_author_link] [orbit_author] [orbit_date] [orbit_excerpt]',
-					),
-				)
-			),
-		);
-			
-		
-			
-		return $meta_box;
-	}
+	
+	
 	
 	function get_default_atts(){
 		return array();
@@ -100,10 +59,10 @@ class ORBIT_QUERY_BASE{
 			$template_url = $template.'.php';	
 		}
 		
-		$theme_templates_url = get_stylesheet_directory()."/orbit-query/".$template_url;
-		$plugin_templates_url = plugin_dir_path(__FILE__)."/templates/".$template_url;
+		$theme_templates_url = apply_filters( 'orbit_query_template_'.$atts['style'] , get_stylesheet_directory()."/orbit-query/".$template_url );
+		$plugin_templates_url = plugin_dir_path(__FILE__)."templates/".$template_url;
 		
-		
+		//print( $theme_templates_url );
 		
 		if( file_exists( $theme_templates_url ) ){
 			include( $theme_templates_url );

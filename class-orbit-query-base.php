@@ -62,8 +62,6 @@ class ORBIT_QUERY_BASE{
 		$theme_templates_url = apply_filters( 'orbit_query_template_'.$atts['style'] , get_stylesheet_directory()."/orbit-query/".$template_url );
 		$plugin_templates_url = plugin_dir_path(__FILE__)."templates/".$template_url;
 		
-		//print( $theme_templates_url );
-		
 		if( file_exists( $theme_templates_url ) ){
 			include( $theme_templates_url );
 		}

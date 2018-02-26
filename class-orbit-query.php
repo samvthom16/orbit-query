@@ -29,7 +29,6 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 			'pagination'			=> '0',
 			'paged'					=> '1',
 			'style'					=> '',
-			'style-id'				=> '0',
 			'id'					=> 'posts-'.rand()
 		);
 	}

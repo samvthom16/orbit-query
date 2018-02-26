@@ -13,7 +13,6 @@ $inc_files = array(
 	'class-orbit-query.php',
 	'class-orbit-query-users.php',
 	'the.php',
-	
 );
 
 foreach( $inc_files as $inc_file ){

@@ -51,16 +51,17 @@ class ORBIT_QUERY_BASE{
 	// CHECK IF THE TEMPLATE FILE EXISTS IN THE THEME
 	function include_template_file( $template, $atts ){
 		
+		$old_template = $template;
 		
 		if( isset( $atts['style'] ) ){
-			$template_url = $template.'-'.$atts['style'].'.php';
-		}
-		else{
-			$template_url = $template.'.php';	
+			$template = $template.'-'.$atts['style'];
 		}
 		
-		$theme_templates_url = apply_filters( 'orbit_query_template_'.$atts['style'] , get_stylesheet_directory()."/orbit-query/".$template_url );
+		$template_url = $template.'.php';	
+		
+		$theme_templates_url = apply_filters( 'orbit_query_template_'.$template , get_stylesheet_directory()."/orbit-query/".$template_url );
 		$plugin_templates_url = plugin_dir_path(__FILE__)."templates/".$template_url;
+		
 		
 		if( file_exists( $theme_templates_url ) ){
 			include( $theme_templates_url );
@@ -69,8 +70,9 @@ class ORBIT_QUERY_BASE{
 			include( $plugin_templates_url );
 		}
 		else{
-			include( "templates/".$template.".php" );
+			include( "templates/".$old_template.".php" );
 		}
+		
 	}
 	
 	function has_shortcode( $posts ){
@@ -93,7 +95,7 @@ class ORBIT_QUERY_BASE{
 			
 		// ENQUEUE SCRIPT
 		wp_enqueue_script('jquery');
-		wp_enqueue_script('pf-script', $uri.'js/posts-query.js', array('jquery'), '1.0.2', true);
+		wp_enqueue_script('oq-script', $uri.'js/orbit-query.js', array('jquery'), '1.0.0', true);
 			
 	}
 }

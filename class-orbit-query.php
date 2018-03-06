@@ -109,7 +109,7 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 		
 		if( $this->query->have_posts() ){
 			the_orbit_articles( $atts );
-			$this->query->reset_postdata(); //wp_reset_postdata();
+			wp_reset_postdata();
 		}
 			
 		return ob_get_clean();
@@ -119,7 +119,7 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 	
 	// CREATE AJAX URL TO REQUEST SUBSEQUENT POSTS LATER
 	function get_ajax_url($args, $dont_include = array()){
-		$url = admin_url( 'admin-ajax.php' )."?action=posts_query";
+		$url = admin_url( 'admin-ajax.php' )."?action=".$this->shortcode_slug;
 		foreach($args as $key=>$val){
 			if(!in_array($key, $dont_include) && $val){
 				
@@ -139,7 +139,7 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 		$default_atts = self::get_default_atts();
 		
 		/* init all attributes for the shortcodes */
-		foreach($default_atts as $key=>$val){
+		foreach($_GET as $key=>$val){
 			if(isset($_GET[$key])){
 				$val = $_GET[$key];
 			}

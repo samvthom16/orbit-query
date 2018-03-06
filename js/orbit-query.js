@@ -39,14 +39,15 @@ jQuery('document').ready(function(){
             };
 
             ul.append_children = function(result) {
+				
                 if (jQuery(result).find(ul.attr('data-target')).length) {
                     ul.attr('data-load-flag', '');
                     btn.html( btn.data('html') )
                 } else {
                     btn.hide();
                 }
-
-                jQuery(result).find(ul.attr('data-target')).each(function() {
+				
+				jQuery(result).find(ul.attr('data-target')).each(function() {
                     var list = jQuery(this);
                     list.hide();
                     list.appendTo(ul);
@@ -61,8 +62,7 @@ jQuery('document').ready(function(){
 
                 var url = ul.sanitize_url();
 
-                console.log(url);
-                console.log('lazy load initiated');
+               
                 jQuery.ajax({
                     'url': url,
                     'success': function(result) {
@@ -90,7 +90,7 @@ jQuery('document').ready(function(){
 
         });
     };
-    jQuery('body').find("[data-behaviour~=ajax-loading]").ajax_loading();
+    jQuery('body').find("[data-behaviour~=oq-ajax-loading]").ajax_loading();
 	
 		
 	

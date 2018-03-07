@@ -92,7 +92,30 @@ jQuery('document').ready(function(){
     };
     jQuery('body').find("[data-behaviour~=oq-ajax-loading]").ajax_loading();
 	
-		
 	
+	
+	jQuery.fn.reload_html = function(){
+        return this.each(function(){
+			var el = jQuery(this);
+            
+            jQuery.ajax({
+    			url : el.attr('data-url'),
+        		success : function(result){
+        			//console.log(result);
+        			//console.log('reload html');
+					el.html(result);
+					el.find("[data-behaviour~=oq-ajax-loading]").ajax_loading();
+            	},
+        		error : function(){
+        			el.hide();
+        		}
+        	});
+			
+			
+			
+			
+		});
+    };
+    jQuery('body').find("[data-behaviour~=oq-reload-html]").reload_html();
 	
 });

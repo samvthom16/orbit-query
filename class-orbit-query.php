@@ -126,7 +126,17 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 		return $url;
 	}
 		
-	
+	function ajax_shortcode( $atts ){
+		ob_start();
+		
+		$atts = $this->get_atts($atts);
+		
+		$atts['url'] = $this->get_ajax_url($atts, array('paged'));	
+		
+		echo "<div data-behaviour='oq-reload-html' data-url='".$atts['url']."'></div>";
+		
+		return ob_get_clean();
+	}
 	
 	function ajax_callback(){
 		

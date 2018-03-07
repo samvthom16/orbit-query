@@ -19,6 +19,7 @@ class ORBIT_QUERY_BASE{
 		add_action( 'wp_enqueue_scripts', array( $this, 'assets') );
 		
 		add_shortcode( $this->shortcode, array( $this, 'plain_shortcode' ), 100 );
+		add_shortcode( $this->shortcode."_ajax", array( $this, 'ajax_shortcode' ), 100 );
 		
 		add_action( 'wp_ajax_'.$this->shortcode_slug, array( $this, 'ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_'.$this->shortcode_slug, array( $this, 'ajax_callback' ) );
@@ -33,13 +34,17 @@ class ORBIT_QUERY_BASE{
 		return array();
 	}
 	
-	function get_atts($atts){
+	function get_atts( $atts ){
 		$defaults_atts = apply_filters( $this->shortcode_slug.'_atts', $this->get_default_atts() );
 		$atts = shortcode_atts( $defaults_atts, $atts, $this->shortcode );
 		return $atts;
 	}
 
-	function plain_shortcode($atts){
+	function plain_shortcode( $atts ){
+		
+	}
+	
+	function ajax_shortcode( $atts ){
 		
 	}
 	
@@ -95,7 +100,7 @@ class ORBIT_QUERY_BASE{
 			
 		// ENQUEUE SCRIPT
 		wp_enqueue_script('jquery');
-		wp_enqueue_script('oq-script', $uri.'js/orbit-query.js', array('jquery'), '1.0.0', true);
+		wp_enqueue_script('oq-script', $uri.'js/orbit-query.js', array('jquery'), '1.0.1', true);
 			
 	}
 }

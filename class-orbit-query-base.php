@@ -53,7 +53,7 @@ class ORBIT_QUERY_BASE{
 		
 		$old_template = $template;
 		
-		if( isset( $atts['style'] ) ){
+		if( isset( $atts['style'] ) && $atts['style'] ){
 			$template = $template.'-'.$atts['style'];
 		}
 		

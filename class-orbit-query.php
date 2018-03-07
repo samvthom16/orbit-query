@@ -95,11 +95,6 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 					);
 				}
 			}	
-			/*
-			echo "<pre>";
-			print_r( $query_atts['tax_query'] );
-			echo "</pre>";
-			*/
 			
 		}
 		
@@ -108,7 +103,8 @@ class ORBIT_QUERY extends ORBIT_QUERY_BASE{
 		$this->query = new WP_Query( $query_atts );
 		
 		if( $this->query->have_posts() ){
-			the_orbit_articles( $atts );
+			the_oq_articles( $atts );
+			the_oq_pagination( $atts );
 			wp_reset_postdata();
 		}
 			
